@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const node_cron_1 = __importDefault(require("node-cron"));
 const SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/sync-all-active-teachers';
-const GOVORIKA_SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/govorika/syncAllTeachersCustomers';
+const GOVORIKA_SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/syncAPI/syncAllTeachersCustomersWithCalendar';
 function syncTeachers() {
     return __awaiter(this, void 0, void 0, function* () {
         const startTime = Date.now();
@@ -41,7 +41,7 @@ function syncGovorikaTeachers() {
         console.log('Starting Govorika teacher sync...', new Date().toISOString());
         try {
             const response = yield axios_1.default.post(GOVORIKA_SYNC_ENDPOINT, {
-                limit: 300
+                limit: 350
             });
             const endTime = Date.now();
             const duration = (endTime - startTime) / 1000; // Convert to seconds

@@ -2,7 +2,7 @@ import axios from 'axios';
 import cron from 'node-cron';
 
 const SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/sync-all-active-teachers';
-const GOVORIKA_SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/govorika/syncAllTeachersCustomers';
+const GOVORIKA_SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/syncAPI/syncAllTeachersCustomersWithCalendar';
 
 async function syncTeachers() {
     const startTime = Date.now();
@@ -31,7 +31,7 @@ async function syncGovorikaTeachers() {
     
     try {
         const response = await axios.post(GOVORIKA_SYNC_ENDPOINT, {
-            limit: 300
+            limit: 350
         });
 
         const endTime = Date.now();
