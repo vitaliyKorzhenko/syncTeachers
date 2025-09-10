@@ -14,14 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const node_cron_1 = __importDefault(require("node-cron"));
-const SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/sync-all-active-teachers';
+const SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/syncAPI/ua/syncAllTeachersCustomersWithCalendar';
 const GOVORIKA_SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/syncAPI/syncAllTeachersCustomersWithCalendar';
 function syncTeachers() {
     return __awaiter(this, void 0, void 0, function* () {
         const startTime = Date.now();
         console.log('Starting teacher sync...', new Date().toISOString());
         try {
-            const response = yield axios_1.default.post(SYNC_ENDPOINT);
+            const response = yield axios_1.default.post(SYNC_ENDPOINT, {
+                limit: 200
+            });
             const endTime = Date.now();
             const duration = (endTime - startTime) / 1000; // Convert to seconds
             console.log('Sync completed successfully!', 'Duration:', duration, 'seconds');

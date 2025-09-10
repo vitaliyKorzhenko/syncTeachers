@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cron from 'node-cron';
 
-const SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/sync-all-active-teachers';
+const SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/syncAPI/ua/syncAllTeachersCustomersWithCalendar';
 const GOVORIKA_SYNC_ENDPOINT = 'http://msg.slideedu.com:4040/syncAPI/syncAllTeachersCustomersWithCalendar';
 
 async function syncTeachers() {
@@ -9,7 +9,9 @@ async function syncTeachers() {
     console.log('Starting teacher sync...', new Date().toISOString());
     
     try {
-        const response = await axios.post(SYNC_ENDPOINT);
+        const response = await axios.post(SYNC_ENDPOINT, {
+            limit: 200
+        });
 
         const endTime = Date.now();
         const duration = (endTime - startTime) / 1000; // Convert to seconds
